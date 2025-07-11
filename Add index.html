@@ -6,10 +6,28 @@ index.html
   <title>Canal Benin Live</title>
 </head>
 <body>
-  <h1>Regardez notre Live !</h1>
-  <video width="640" height="360" controls autoplay>
-    <source src="http://161.97.146.236:8085/live/test.m3u8" type="application/x-mpegURL">
-    Votre navigateur ne supporte pas la lecture HLS.
-  </video>
+  <h1>Regardez Canal Benin Live !</h1>
+
+  <video id="video" width="640" height="360" controls autoplay></video>
+
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <script>
+    if (Hls.isSupported()) {
+      var video = document.getElementById('video');
+      var hls = new Hls();
+      hls.loadSource('http://161.97.146.236:8085/live/test.m3u8');
+      hls.attachMedia(video);
+      hls.on(Hls.Events.MANIFEST_PARSED, function () {
+        video.play();
+      });
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      video.src = 'http://161.97.146.236:8085/live/test.m3u8';
+      video.addEventListener('loadedmetadata', function () {
+        video.play();
+      });
+    } else {
+      alert("Votre navigateur ne supporte pas la lecture HLS.");
+    }
+  </script>
 </body>
 </html>
