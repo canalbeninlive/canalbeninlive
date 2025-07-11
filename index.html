@@ -4,13 +4,12 @@ index.html
 <head>
   <meta charset="UTF-8" />
   <title>Canal Benin Live</title>
-</head>
   <script>
-  if (location.protocol === 'https:') {
-    // Redirige vers HTTP sur le même URL
-    location.href = 'http://' + location.host + location.pathname;
-  }
-</script>
+    if (location.protocol === 'https:') {
+      window.location.replace('http://' + location.hostname + location.pathname + location.search);
+    }
+  </script>
+</head>
 <body>
   <h1>Regardez Canal Benin Live !</h1>
 
